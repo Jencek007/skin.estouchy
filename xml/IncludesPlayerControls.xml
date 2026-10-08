@@ -318,7 +318,7 @@
 				</control>
 			</control>
 		</control>
-		<control type="group">
+		<control type="group"> <!-- Btns -->
 			<posy>80r</posy>
 			<control type="grouplist">
 				<posx>0</posx>
