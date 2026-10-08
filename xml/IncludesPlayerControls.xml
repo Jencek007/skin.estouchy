@@ -44,8 +44,8 @@
 				<width>40</width>
 				<height>40</height>
 				<label></label>
-				<texturenofocus>osd_volume.png</texturenofocus>
-				<texturefocus colordiffuse="blue">osd_volume.png</texturefocus>
+				<texturenofocus colordiffuse="8049ADEE">>osd_volume.png</texturenofocus>
+				<texturefocus colordiffuse="FF49ADEE">osd_volume.png</texturefocus>
 				<onclick>ActivateWindow(1112)</onclick>
 			</control>
 			<control type="group">
@@ -153,22 +153,22 @@
 			</control>
 		</control>
 		<control type="group">
-			<posx>70r</posx>
+			<posx>140r</posx>
 			<posy>0</posy>
 			<control type="image">
 				<posx>0</posx>
 				<posy>0</posy>
-				<width>2</width>
-				<height>78</height>
+				<width>4</width>
+				<height>156</height>
 				<texture border="2">separator.png</texture>
 				<colordiffuse>FF464646</colordiffuse>
 			</control>
 			<control type="button">
 				<description>Close Button</description>
-				<posx>4</posx>
-				<posy>9</posy>
-				<width>60</width>
-				<height>60</height>
+				<posx>8</posx> <!-- 4 -->
+				<posy>18</posy> <!-- 9 -->
+				<width>120</width>
+				<height>120</height>
 				<font></font>
 				<onclick>Back</onclick>
 				<texturefocus>icon_dialog_close.png</texturefocus>
@@ -318,65 +318,66 @@
 				</control>
 			</control>
 		</control>
-		<control type="group"> <!-- Btns -->
-			<posy>80r</posy>
+		<control type="group">  <!-- btns -->
+			<posy>Center</posy> <!-- 180r -->
+			<top>400</top>
 			<control type="grouplist">
 				<posx>0</posx>
 				<posy>15</posy>
 				<width>ScreenWidth</width>
-				<height>50</height>
+				<height>180</height>
 				<align>center</align>
 				<orientation>horizontal</orientation>
-				<itemgap>30</itemgap>
+				<itemgap>40</itemgap>
 				<control type="button">
-					<width>50</width>
-					<height>50</height>
-					<texturefocus colordiffuse="blue">osd_previous.png</texturefocus>
-					<texturenofocus>osd_previous.png</texturenofocus>
+					<width>150</width>
+					<height>150</height>
+					<texturefocus colordiffuse="FF49ADEE">osd_previous.png</texturefocus>
+					<texturenofocus colordiffuse="8049ADEE">osd_previous.png</texturenofocus>
 					<onclick>PlayerControl(Previous)</onclick>
 				</control>
 				<control type="button">
-					<width>50</width>
-					<height>50</height>
-					<texturefocus colordiffuse="blue">osd_rewind.png</texturefocus>
-					<texturenofocus>osd_rewind.png</texturenofocus>
+					<width>150</width>
+					<height>150</height>
+					<texturefocus colordiffuse="FF49ADEE">osd_rewind.png</texturefocus>
+					<texturenofocus colordiffuse="8049ADEE">osd_rewind.png</texturenofocus>
 					<onclick>PlayerControl(Rewind)</onclick>
 				</control>
 				<control type="togglebutton">
-					<width>50</width>
-					<height>50</height>
-					<texturefocus colordiffuse="blue">osd_pause.png</texturefocus>
-					<texturenofocus>osd_pause.png</texturenofocus>
-					<alttexturefocus colordiffuse="blue">osd_play.png</alttexturefocus>
-					<alttexturenofocus>osd_play.png</alttexturenofocus>
+					<width>150</width>
+					<height>150</height>
+					<texturefocus colordiffuse="FF48ADEE">osd_pause.png</texturefocus>
+					<texturenofocus colordiffuse="8049ADEE">osd_pause.png</texturenofocus>
+					<alttexturefocus colordiffuse="FF49ADEE">osd_play.png</alttexturefocus>
+					<alttexturenofocus colordiffuse="8049ADEE">osd_play.png</alttexturenofocus>
 					<usealttexture>Player.Paused | Player.Forwarding | Player.Rewinding</usealttexture>
 					<onclick>PlayerControl(Play)</onclick>
 				</control>
 				<control type="button">
-					<width>50</width>
-					<height>50</height>
-					<texturefocus colordiffuse="blue">osd_stop.png</texturefocus>
-					<texturenofocus>osd_stop.png</texturenofocus>
+					<width>150</width>
+					<height>150</height>
+					<texturefocus colordiffuse="FF49ADEE">osd_stop.png</texturefocus>
+					<texturenofocus colordiffuse="8049ADEE">osd_stop.png</texturenofocus>
 					<onclick>PlayerControl(Stop)</onclick>
 				</control>
 				<control type="button">
-					<width>50</width>
-					<height>50</height>
-					<texturefocus colordiffuse="blue">osd_forward.png</texturefocus>
-					<texturenofocus>osd_forward.png</texturenofocus>
+					<width>150</width>
+					<height>150</height>
+					<texturefocus colordiffuse="FF49ADEE">osd_forward.png</texturefocus>
+					<texturenofocus colordiffuse="8049ADEE">osd_forward.png</texturenofocus>
 					<onclick>PlayerControl(Forward)</onclick>
 				</control>
 				<control type="button">
-					<width>50</width>
-					<height>50</height>
-					<texturefocus colordiffuse="blue">osd_next.png</texturefocus>
-					<texturenofocus>osd_next.png</texturenofocus>
+					<width>150</width>
+					<height>150</height>
+					<texturefocus colordiffuse="FF49ADEE">osd_next.png</texturefocus>
+					<texturenofocus colordiffuse="8049ADEE">osd_next.png</texturenofocus>
 					<onclick>PlayerControl(Next)</onclick>
 				</control>
 				<control type="togglebutton">
-					<width>50</width>
-					<height>50</height>
-					<texturefocus colordiffuse="blue">osd_record.png</texturefocus>
+					<width>150</width>
+					<height>150</height>
+					<texturefocus colordiffuse="FF49ADEE">osd_record.png</texturefocus>
 					<texturenofocus>osd_record.png</texturenofocus>
 					<alttexturefocus colordiffuse="red">osd_record.png</alttexturefocus>
 					<alttexturenofocus colordiffuse="red">osd_record.png</alttexturenofocus>
