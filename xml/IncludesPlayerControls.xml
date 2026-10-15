@@ -307,14 +307,26 @@
 					<label>$VAR[OSDLabel4]</label>
 				</control>
 				<control type="label">
-					<posx>20r</posx>
-					<posy>122</posy>
+					<description>Video end Time</description>
+					<posx>280r</posx>
+					<posy>60</posy>
 					<width>840</width>
 					<height>25</height>
 					<label>$VAR[OSDLabel5]</label>
 					<align>right</align>
 					<aligny>center</aligny>
-					<font>font20</font>
+					<font>font25</font>
+				</control>
+				<control type="label">
+					<description>Actual Time</description>
+					<posx>280r</posx>
+					<posy>20</posy> 
+					<width>840</width>
+					<height>25</height>
+					<label>$LOCALIZE[31001] $INFO[System.Time]</label>
+					<align>right</align>
+					<aligny>center</aligny>
+					<font>font30</font>
 				</control>
 			</control>
 		</control>
