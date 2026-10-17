@@ -52,6 +52,7 @@
 			<height>270</height>
 			<font>font25</font>
 			<align>center</align>
+			<scroll>true</scroll>
 			<texturefocus>list_focus.png</texturefocus>
 			<texturenofocus></texturenofocus>
 		</control>
