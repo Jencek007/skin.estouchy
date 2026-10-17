@@ -44,8 +44,8 @@
 				<width>40</width>
 				<height>40</height>
 				<label></label>
-				<texturenofocus colordiffuse="blue1">>osd_volume.png</texturenofocus>
-				<texturefocus colordiffuse="blue">osd_volume.png</texturefocus>
+				<texturenofocus colordiffuse="8049ADEE">>osd_volume.png</texturenofocus>
+				<texturefocus colordiffuse="FF49ADEE">osd_volume.png</texturefocus>
 				<onclick>ActivateWindow(1112)</onclick>
 			</control>
 			<control type="group">
@@ -309,7 +309,7 @@
 				<control type="label">
 					<description>Video end Time</description>
 					<posx>280r</posx>
-					<posy>60</posy>
+					<posy>55</posy>
 					<width>840</width>
 					<height>25</height>
 					<label>$VAR[OSDLabel5]</label>
@@ -326,7 +326,20 @@
 					<label>$LOCALIZE[31001] $INFO[System.Time]</label>
 					<align>right</align>
 					<aligny>center</aligny>
-					<font>font30</font>
+					<font>font25</font>
+				</control>
+				<control type="label">
+					<description>Battery Life</description>
+					<posx>280r</posx>
+					<posy>90</posy> 
+					<width>840</width>
+					<height>25</height>
+					<label>$VAR[OSDLabel6]</label>
+					<textcolor>$VAR[BatteryColor]</textcolor>
+					<align>right</align>
+					<aligny>center</aligny>
+					<font>font25</font>
+					<visible>String.Contains(System.BatteryLevel, 0) | String.Contains(System.BatteryLevel, 1) | String.Contains(System.BatteryLevel, 2) | String.Contains(System.BatteryLevel, 3) | String.Contains(System.BatteryLevel, 4) | String.Contains(System.BatteryLevel, 5) | String.Contains(System.BatteryLevel, 6) | String.Contains(System.BatteryLevel, 7) | String.Contains(System.BatteryLevel, 8) | String.Contains(System.BatteryLevel, 9)</visible>
 				</control>
 			</control>
 		</control>
@@ -344,46 +357,46 @@
 				<control type="button">
 					<width>150</width>
 					<height>150</height>
-					<texturefocus colordiffuse="blue">osd_previous.png</texturefocus>
-					<texturenofocus colordiffuse="blue1">osd_previous.png</texturenofocus>
+					<texturefocus colordiffuse="FF49ADEE">osd_previous.png</texturefocus>
+					<texturenofocus colordiffuse="8049ADEE">osd_previous.png</texturenofocus>
 					<onclick>PlayerControl(Previous)</onclick>
 				</control>
 				<control type="button">
 					<width>150</width>
 					<height>150</height>
-					<texturefocus colordiffuse="blue">osd_rewind.png</texturefocus>
-					<texturenofocus colordiffuse="blue1">osd_rewind.png</texturenofocus>
+					<texturefocus colordiffuse="FF49ADEE">osd_rewind.png</texturefocus>
+					<texturenofocus colordiffuse="8049ADEE">osd_rewind.png</texturenofocus>
 					<onclick>PlayerControl(Rewind)</onclick>
 				</control>
 				<control type="togglebutton">
 					<width>150</width>
 					<height>150</height>
-					<texturefocus colordiffuse="blue">osd_pause.png</texturefocus>
-					<texturenofocus colordiffuse="blue1">osd_pause.png</texturenofocus>
-					<alttexturefocus colordiffuse="blue">osd_play.png</alttexturefocus>
-					<alttexturenofocus colordiffuse="blue1">osd_play.png</alttexturenofocus>
+					<texturefocus colordiffuse="FF48ADEE">osd_pause.png</texturefocus>
+					<texturenofocus colordiffuse="8049ADEE">osd_pause.png</texturenofocus>
+					<alttexturefocus colordiffuse="FF49ADEE">osd_play.png</alttexturefocus>
+					<alttexturenofocus colordiffuse="8049ADEE">osd_play.png</alttexturenofocus>
 					<usealttexture>Player.Paused | Player.Forwarding | Player.Rewinding</usealttexture>
 					<onclick>PlayerControl(Play)</onclick>
 				</control>
 				<control type="button">
 					<width>150</width>
 					<height>150</height>
-					<texturefocus colordiffuse="blue">osd_stop.png</texturefocus>
-					<texturenofocus colordiffuse="blue1">osd_stop.png</texturenofocus>
+					<texturefocus colordiffuse="FF49ADEE">osd_stop.png</texturefocus>
+					<texturenofocus colordiffuse="8049ADEE">osd_stop.png</texturenofocus>
 					<onclick>PlayerControl(Stop)</onclick>
 				</control>
 				<control type="button">
 					<width>150</width>
 					<height>150</height>
-					<texturefocus colordiffuse="blue">osd_forward.png</texturefocus>
-					<texturenofocus colordiffuse="blue1">osd_forward.png</texturenofocus>
+					<texturefocus colordiffuse="FF49ADEE">osd_forward.png</texturefocus>
+					<texturenofocus colordiffuse="8049ADEE">osd_forward.png</texturenofocus>
 					<onclick>PlayerControl(Forward)</onclick>
 				</control>
 				<control type="button">
 					<width>150</width>
 					<height>150</height>
-					<texturefocus colordiffuse="blue">osd_next.png</texturefocus>
-					<texturenofocus colordiffuse="blue1">osd_next.png</texturenofocus>
+					<texturefocus colordiffuse="FF49ADEE">osd_next.png</texturefocus>
+					<texturenofocus colordiffuse="8049ADEE">osd_next.png</texturenofocus>
 					<onclick>PlayerControl(Next)</onclick>
 				</control>
 				<control type="togglebutton">
@@ -396,7 +409,7 @@
 					<usealttexture>Player.Record</usealttexture>
 					<onclick>PVR.ToggleRecordPlayingChannel</onclick>
 					<visible>PVR.CanRecordPlayingChannel</visible>
-				</control>+
+				</control>
 			</control>
 		</control>
 		<include>BottomMenu</include>
