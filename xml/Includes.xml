@@ -41,6 +41,15 @@
 		<value condition="Window.IsVisible(MusicOSD) + MusicPlayer.HasNext">$LOCALIZE[209]: $INFO[MusicPlayer.offset(1).Artist,, - ]$INFO[MusicPlayer.offset(1).Title]</value>
 		<value condition="Window.IsVisible(VideoOSD)">$LOCALIZE[31049] $INFO[Player.FinishTime]</value>
 	</variable>
+	<variable name="OSDLabel6">
+		<value condition="Window.IsVisible(MusicOSD) + MusicPlayer.HasNext">$LOCALIZE[209]: $INFO[MusicPlayer.offset(1).Artist,, - ]$INFO[MusicPlayer.offset(1).Title]</value>
+		<value condition="Window.IsVisible(VideoOSD)">$LOCALIZE[31047] $INFO[System.BatteryLevel]</value>
+	</variable>
+	<variable name="BatteryColor">
+		<value condition="Integer.IsLessOrEqual(System.BatteryLevel,15)">FFFF0000</value>
+		<value condition="Integer.IsLessOrEqual(System.BatteryLevel,30)">FFFFA500</value>
+		<value>FF00FF00</value>
+	</variable>
 	<variable name="PosterThumb">
 		<value condition="!String.IsEmpty(ListItem.Art(poster))">$INFO[ListItem.Art(poster)]</value>
 		<value condition="String.IsEmpty(ListItem.Art(poster))">$INFO[ListItem.Icon]</value>
