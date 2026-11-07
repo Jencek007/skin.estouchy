@@ -226,6 +226,10 @@ msgctxt "#31356"
 msgid "Download Subtitles"
 msgstr "Stáhnout titulky"
 
+msgctxt "#31357"
+msgid "Subs"
+msgstr "Tit."
+
 msgctxt "#31358"
 msgid "Teletext"
 msgstr "Teletext"
