@@ -399,11 +399,15 @@
 					<visible>PVR.CanRecordPlayingChannel</visible>
 				</control>
 				<control type="button">
-					<width>130</width>
+					<width>250</width>
 					<height>130</height>
-					<texturefocus colordiffuse="FF49ADEE">DefaultAddonSubtitles.png</texturefocus>
-					<texturenofocus colordiffuse="8049ADEE">DefaultAddonSubtitles.png</texturenofocus>
-					<onclick>ShowSubtitles</onclick>
+					<font>font80_title</font>
+					<textcolor>8049ADEE</textcolor>
+					<focusedcolor>FF49ADEE</focusedcolor>
+					<align>center</align>
+					<aligny>center</aligny>
+					<label>$VAR[OSDLabel7]</label>
+					<onclick>Action(nextsubtitle)</onclick>
 					<visible>VideoPlayer.HasSubtitles</visible>
 				</control>
 			</control>
