@@ -341,17 +341,17 @@
 				<height>180</height>
 				<align>center</align>
 				<orientation>horizontal</orientation>
-				<itemgap>40</itemgap>
+				<itemgap>80</itemgap>
 				<control type="button">
-					<width>150</width>
-					<height>150</height>
+					<width>125</width>
+					<height>125</height>
 					<texturefocus colordiffuse="FF49ADEE">osd_previous.png</texturefocus>
 					<texturenofocus colordiffuse="8049ADEE">osd_previous.png</texturenofocus>
 					<onclick>PlayerControl(Previous)</onclick>
 				</control>
 				<control type="button">
-					<width>150</width>
-					<height>150</height>
+					<width>125</width>
+					<height>125</height>
 					<texturefocus colordiffuse="FF49ADEE">osd_rewind.png</texturefocus>
 					<texturenofocus colordiffuse="8049ADEE">osd_rewind.png</texturenofocus>
 					<onclick>PlayerControl(Rewind)</onclick>
@@ -374,15 +374,15 @@
 					<onclick>PlayerControl(Stop)</onclick>
 				</control>
 				<control type="button">
-					<width>150</width>
-					<height>150</height>
+					<width>125</width>
+					<height>125</height>
 					<texturefocus colordiffuse="FF49ADEE">osd_forward.png</texturefocus>
 					<texturenofocus colordiffuse="8049ADEE">osd_forward.png</texturenofocus>
 					<onclick>PlayerControl(Forward)</onclick>
 				</control>
 				<control type="button">
-					<width>150</width>
-					<height>150</height>
+					<width>125</width>
+					<height>125</height>
 					<texturefocus colordiffuse="FF49ADEE">osd_next.png</texturefocus>
 					<texturenofocus colordiffuse="8049ADEE">osd_next.png</texturenofocus>
 					<onclick>PlayerControl(Next)</onclick>
@@ -397,6 +397,14 @@
 					<usealttexture>Player.Record</usealttexture>
 					<onclick>PVR.ToggleRecordPlayingChannel</onclick>
 					<visible>PVR.CanRecordPlayingChannel</visible>
+				</control>
+				<control type="button">
+					<width>130</width>
+					<height>130</height>
+					<texturefocus colordiffuse="FF49ADEE">DefaultAddonSubtitles.png</texturefocus>
+					<texturenofocus colordiffuse="8049ADEE">DefaultAddonSubtitles.png</texturenofocus>
+					<onclick>ShowSubtitles</onclick>
+					<visible>VideoPlayer.HasSubtitles</visible>
 				</control>
 			</control>
 		</control>
