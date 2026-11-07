@@ -257,7 +257,9 @@ msgctxt "#31356"
 msgid "Download Subtitles"
 msgstr ""
 
-#empty string with id 31357
+msgctxt "#31357"
+msgid "Subs"
+msgstr ""
 
 msgctxt "#31358"
 msgid "Teletext"
