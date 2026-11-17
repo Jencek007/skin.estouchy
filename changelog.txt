@@ -1,3 +1,24 @@
+V4.0.22 (2026.11.16)
+-change fanart and icons
+-update strings in En-GB
+-some adds in VideoOSD
+
+
+V4.0.18 (2026.11.15)
+-Adding remote control support 
+
+
+V4.0.15 (2026.11.12)
+-Change size, pos in the VideosOSD player buttons
+-Add label for actual sub language under the sub button
+-Change moving in the home.xml with keyboard
+
+V4.0.10
+- Add date to Home / Header
+- Add Sub button to the VideoOSD control buttons
+- Change color, size, pos in the VideosOSD player buttons
+- Remove Close VideoOSD button and change to onclick
+
 V3.0.3
 - Add chapter indicators to the progress bar
 - Add sort method / sort order / Channel group options to the PVR sections

@@ -1,6 +1,17 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <includes>
 	<include name="PlayerControlCommons">
+		<control type="button">
+			<description>CloseOSD</description>
+			<posx>0</posx>
+			<posy>0</posy>
+			<include>ScreenWidth</include>
+			<height>100%</height>
+			<texturenofocus></texturenofocus>
+			<texturefocus></texturefocus>
+			<onclick>Dialog.Close(VideoOSD)</onclick>
+			<onclick>Dialog.Close(MusicOSD)</onclick>
+		</control>
 		<visible>!Window.IsVisible(SliderDialog)</visible>
 		<include>VisibleFadeEffect</include>
 		<control type="image">
@@ -44,8 +55,8 @@
 				<width>40</width>
 				<height>40</height>
 				<label></label>
-				<texturenofocus>osd_volume.png</texturenofocus>
-				<texturefocus colordiffuse="blue">osd_volume.png</texturefocus>
+				<texturenofocus colordiffuse="8049ADEE">osd_volume.png</texturenofocus>
+				<texturefocus colordiffuse="FF49ADEE">osd_volume.png</texturefocus>
 				<onclick>ActivateWindow(1112)</onclick>
 			</control>
 			<control type="group">
@@ -152,29 +163,6 @@
 				</control>
 			</control>
 		</control>
-		<control type="group">
-			<posx>70r</posx>
-			<posy>0</posy>
-			<control type="image">
-				<posx>0</posx>
-				<posy>0</posy>
-				<width>2</width>
-				<height>78</height>
-				<texture border="2">separator.png</texture>
-				<colordiffuse>FF464646</colordiffuse>
-			</control>
-			<control type="button">
-				<description>Close Button</description>
-				<posx>4</posx>
-				<posy>9</posy>
-				<width>60</width>
-				<height>60</height>
-				<font></font>
-				<onclick>Back</onclick>
-				<texturefocus>icon_dialog_close.png</texturefocus>
-				<texturenofocus>icon_dialog_close.png</texturenofocus>
-			</control>
-		</control>
 		<control type="image">
 			<posx>0</posx>
 			<posy>80r</posy>
@@ -191,9 +179,9 @@
 				<posx>0</posx>
 				<posy>0</posy>
 				<include>ScreenWidth</include>
-				<height>150</height>
+				<height>230</height>
 				<texture>side_panel.png</texture>
-				<colordiffuse>A0000000</colordiffuse>
+				<colordiffuse>C0000000</colordiffuse>
 			</control>
 			<control type="group">
 				<control type="image">
@@ -215,14 +203,18 @@
 					<font>font25</font>
 					<label>$VAR[OSDLabel1]</label>
 				</control>
+				<!-- Hlavní název filmu/seriálu (končí na 760px, delší názvy plynule rolují) -->
 				<control type="label">
 					<posx>280</posx>
 					<posy>50</posy>
-					<width>720</width>
+					<width>480</width>
 					<height>30</height>
 					<font>font30_title</font>
 					<align>left</align>
 					<aligny>center</aligny>
+					<scroll>true</scroll>
+					<scrollspeed>40</scrollspeed>
+					<scrollsuffix>  -  </scrollsuffix>
 					<label>$VAR[OSDLabel2]</label>
 				</control>
 				<control type="label">
@@ -233,6 +225,36 @@
 					<align>left</align>
 					<font>font24</font>
 					<label>$VAR[OSDLabel3]</label>
+				</control>
+				<!-- NOVÝ POPIS DĚJE (PLOT) -->
+				<control type="textbox">
+					<description>Plot</description>
+					<posx>250</posx>
+					<posy>120</posy>
+					<width>1200</width>
+					<height>105</height>
+					<font>font20</font>
+					<textcolor>FFD0D0D0</textcolor>
+					<align>justify</align>
+					<autoscroll time="3000" delay="4000" repeat="5000">true</autoscroll>
+					<label>$INFO[VideoPlayer.Plot]</label>
+					<visible>Window.IsVisible(VideoOSD) + !String.IsEmpty(VideoPlayer.Plot)</visible>
+				</control>
+				<!-- JEDEN ŘÁDEK METADAT (začíná na 780px, končí nejpozději na 1240px) -->
+				<control type="label">
+					<posx>780</posx>
+					<posy>50</posy>
+					<width>460</width>
+					<height>30</height>
+					<align>left</align>
+					<aligny>center</aligny>
+					<font>font25</font>
+					<textcolor>FF49ADEE</textcolor>
+					<scroll>true</scroll>
+					<scrollspeed>40</scrollspeed>
+					<scrollsuffix>   •   </scrollsuffix>
+					<label>$INFO[VideoPlayer.Rating,★ ,  •  ]$INFO[VideoPlayer.Year]$INFO[VideoPlayer.HdrType,  •  [,]]</label>
+					<visible>Window.IsVisible(VideoOSD) + [!String.IsEmpty(VideoPlayer.Rating) | !String.IsEmpty(VideoPlayer.Year) | !String.IsEmpty(VideoPlayer.HdrType)]</visible>
 				</control>
 				<control type="group">
 					<posx>275r</posx>
@@ -257,7 +279,7 @@
 						<texture>$INFO[MusicPlayer.Codec,flagging/audio/,.png]</texture>
 					</control>
 				</control>
-				<control type="group">
+				<control type="group"> <!-- bottom group - fanart, codec info, time, battery -->
 					<posx>230r</posx>
 					<posy>30</posy>
 					<width>250</width>
@@ -307,82 +329,255 @@
 					<label>$VAR[OSDLabel4]</label>
 				</control>
 				<control type="label">
-					<posx>20r</posx>
-					<posy>122</posy>
+					<description>Video end Time</description>
+					<posx>280r</posx>
+					<posy>55</posy>
 					<width>840</width>
 					<height>25</height>
 					<label>$VAR[OSDLabel5]</label>
 					<align>right</align>
 					<aligny>center</aligny>
-					<font>font20</font>
+					<font>font25</font>
+				</control>
+				<control type="label">
+					<description>Actual Time</description>
+					<posx>280r</posx>
+					<posy>20</posy> 
+					<width>840</width>
+					<height>25</height>
+					<label>$LOCALIZE[31001] $INFO[System.Time]</label>
+					<align>right</align>
+					<aligny>center</aligny>
+					<font>font25</font>
+				</control>
+				<control type="label">
+					<description>Battery Life</description>
+					<posx>280r</posx>
+					<posy>90</posy> 
+					<width>840</width>
+					<height>25</height>
+					<label>$VAR[OSDLabel6]</label>
+					<textcolor>$VAR[BatteryColor]</textcolor>
+					<align>right</align>
+					<aligny>center</aligny>
+					<font>font25</font>
+					<visible>String.Contains(System.BatteryLevel, 0) | String.Contains(System.BatteryLevel, 1) | String.Contains(System.BatteryLevel, 2) | String.Contains(System.BatteryLevel, 3) | String.Contains(System.BatteryLevel, 4) | String.Contains(System.BatteryLevel, 5) | String.Contains(System.BatteryLevel, 6) | String.Contains(System.BatteryLevel, 7) | String.Contains(System.BatteryLevel, 8) | String.Contains(System.BatteryLevel, 9)</visible>
 				</control>
 			</control>
 		</control>
-		<control type="group">
-			<posy>80r</posy>
-			<control type="grouplist">
+				<control type="group">  <!-- controls buttons -->
+			<posy>Center</posy> 
+			<top>370</top>
+			<control type="grouplist" id="200">
 				<posx>0</posx>
 				<posy>15</posy>
 				<width>ScreenWidth</width>
-				<height>50</height>
+				<height>280</height>
 				<align>center</align>
 				<orientation>horizontal</orientation>
-				<itemgap>30</itemgap>
-				<control type="button">
-					<width>50</width>
-					<height>50</height>
-					<texturefocus colordiffuse="blue">osd_previous.png</texturefocus>
-					<texturenofocus>osd_previous.png</texturenofocus>
-					<onclick>PlayerControl(Previous)</onclick>
+				<itemgap>70</itemgap>
+				
+				<!-- 1. PREVIOUS (125x125 vycentrovaný na osu 260px -> top 67) -->
+				<control type="group" id="211">
+					<width>125</width>
+					<height>260</height>
+					<visible>Player.HasSceneMarkers | Player.ChapterCount | Integer.IsGreater(Playlist.Length(video),1) | PVR.IsTimeShift</visible>
+					<control type="button" id="201">
+						<top>67</top>
+						<width>125</width>
+						<height>125</height>
+						<onright>202</onright>
+						<texturefocus colordiffuse="FF49ADEE">osd_previous.png</texturefocus>
+						<texturenofocus colordiffuse="8049ADEE">osd_previous.png</texturenofocus>
+						<onclick>PlayerControl(Previous)</onclick>
+					</control>
 				</control>
-				<control type="button">
-					<width>50</width>
-					<height>50</height>
-					<texturefocus colordiffuse="blue">osd_rewind.png</texturefocus>
-					<texturenofocus>osd_rewind.png</texturenofocus>
-					<onclick>PlayerControl(Rewind)</onclick>
+
+				<!-- 2. REWIND (125x125 vycentrovaný -> top 67) -->
+				<control type="group" id="212">
+					<width>125</width>
+					<height>260</height>
+					<control type="button" id="202">
+						<top>67</top>
+						<width>125</width>
+						<height>125</height>
+						<onleft>201</onleft>
+						<onright>203</onright>
+						<texturefocus colordiffuse="FF49ADEE">osd_rewind.png</texturefocus>
+						<texturenofocus colordiffuse="8049ADEE">osd_rewind.png</texturenofocus>
+						<onclick>PlayerControl(Rewind)</onclick>
+					</control>
 				</control>
-				<control type="togglebutton">
-					<width>50</width>
-					<height>50</height>
-					<texturefocus colordiffuse="blue">osd_pause.png</texturefocus>
-					<texturenofocus>osd_pause.png</texturenofocus>
-					<alttexturefocus colordiffuse="blue">osd_play.png</alttexturefocus>
-					<alttexturenofocus>osd_play.png</alttexturenofocus>
+
+				<!-- 3. PLAY / PAUSE (zvětšeno na 260x260) -->
+				<control type="togglebutton" id="203">
+					<width>260</width>
+					<height>260</height>
+					<onleft>202</onleft>
+					<onright>204</onright>
+					<texturefocus colordiffuse="FF48ADEE">osd_pause.png</texturefocus>
+					<texturenofocus colordiffuse="8049ADEE">osd_pause.png</texturenofocus>
+					<alttexturefocus colordiffuse="FF49ADEE">osd_play.png</alttexturefocus>
+					<alttexturenofocus colordiffuse="8049ADEE">osd_play.png</alttexturenofocus>
 					<usealttexture>Player.Paused | Player.Forwarding | Player.Rewinding</usealttexture>
 					<onclick>PlayerControl(Play)</onclick>
 				</control>
-				<control type="button">
-					<width>50</width>
-					<height>50</height>
-					<texturefocus colordiffuse="blue">osd_stop.png</texturefocus>
-					<texturenofocus>osd_stop.png</texturenofocus>
-					<onclick>PlayerControl(Stop)</onclick>
+
+				<!-- 4. FORWARD (125x125 vycentrovaný -> top 67) -->
+				<control type="group" id="214">
+					<width>125</width>
+					<height>260</height>
+					<control type="button" id="204">
+						<top>67</top>
+						<width>125</width>
+						<height>125</height>
+						<onleft>203</onleft>
+						<onright>205</onright>
+						<texturefocus colordiffuse="FF49ADEE">osd_forward.png</texturefocus>
+						<texturenofocus colordiffuse="8049ADEE">osd_forward.png</texturenofocus>
+						<onclick>PlayerControl(Forward)</onclick>
+					</control>
 				</control>
-				<control type="button">
-					<width>50</width>
-					<height>50</height>
-					<texturefocus colordiffuse="blue">osd_forward.png</texturefocus>
-					<texturenofocus>osd_forward.png</texturenofocus>
-					<onclick>PlayerControl(Forward)</onclick>
+
+				<!-- 5. NEXT (125x125 vycentrovaný -> top 67) -->
+				<control type="group" id="215">
+					<width>125</width>
+					<height>260</height>
+					<visible>Player.HasSceneMarkers | Player.ChapterCount | Integer.IsGreater(Playlist.Length(video),1) | PVR.IsTimeShift</visible>
+					<control type="button" id="205">
+						<top>67</top>
+						<width>125</width>
+						<height>125</height>
+						<onleft>204</onleft>
+						<onright>206</onright>
+						<texturefocus colordiffuse="FF49ADEE">osd_next.png</texturefocus>
+						<texturenofocus colordiffuse="8049ADEE">osd_next.png</texturenofocus>
+						<onclick>PlayerControl(Next)</onclick>
+					</control>
 				</control>
-				<control type="button">
-					<width>50</width>
-					<height>50</height>
-					<texturefocus colordiffuse="blue">osd_next.png</texturefocus>
-					<texturenofocus>osd_next.png</texturenofocus>
-					<onclick>PlayerControl(Next)</onclick>
+
+				<!-- 6. STOP (125x125 vycentrovaný -> top 67) -->
+				<control type="group" id="216">
+					<width>125</width>
+					<height>260</height>
+					<control type="button" id="206">
+						<top>67</top>
+						<width>125</width>
+						<height>125</height>
+						<onleft>205</onleft>
+						<onright>700</onright>
+						<texturefocus colordiffuse="FF49ADEE">osd_stop.png</texturefocus>
+						<texturenofocus colordiffuse="8049ADEE">osd_stop.png</texturenofocus>
+						<onclick>PlayerControl(Stop)</onclick>
+					</control>
 				</control>
-				<control type="togglebutton">
-					<width>50</width>
-					<height>50</height>
-					<texturefocus colordiffuse="blue">osd_record.png</texturefocus>
-					<texturenofocus>osd_record.png</texturenofocus>
-					<alttexturefocus colordiffuse="red">osd_record.png</alttexturefocus>
-					<alttexturenofocus colordiffuse="red">osd_record.png</alttexturenofocus>
-					<usealttexture>Player.Record</usealttexture>
-					<onclick>PVR.ToggleRecordPlayingChannel</onclick>
+
+				<!-- 7. SUBTITLES + KOMPLETNÍ POPIS STOPY -->
+				<control type="group" id="701">
+					<width>250</width>
+					<height>260</height>
+					<visible>VideoPlayer.HasSubtitles</visible>
+
+					<!-- Hlavní tlačítko titulků s ID 700 (zarovnáno na osu 130px) -->
+					<control type="button" id="700">
+						<top>0</top>
+						<width>250</width>
+						<height>215</height>
+						<onleft>206</onleft>
+						<onright>208</onright>
+						<texturefocus />
+						<texturenofocus />
+						<font>font80_title</font>
+						<textcolor>8049ADEE</textcolor>
+						<focusedcolor>FF49ADEE</focusedcolor>
+						<align>center</align>
+						<aligny>center</aligny>
+						<label>$VAR[OSDLabel7]</label>
+						<onclick>Action(nextsubtitle)</onclick>
+					</control>
+
+					<!-- 1A. Název stopy (bez fokusu) -->
+					<control type="label">
+						<top>185</top>
+						<width>250</width>
+						<height>45</height>
+						<font>font30_title</font>
+						<textcolor>8049ADEE</textcolor>
+						<align>center</align>
+						<aligny>center</aligny>
+						<scroll>true</scroll>
+						<scrollspeed>40</scrollspeed>
+						<scrollsuffix>  -  </scrollsuffix>
+						<label>$INFO[VideoPlayer.SubtitleName]</label>
+						<visible>VideoPlayer.SubtitlesEnabled + !String.IsEmpty(VideoPlayer.SubtitleName) + !Control.HasFocus(700)</visible>
+					</control>
+
+					<!-- 1B. Název stopy (při fokusu) -->
+					<control type="label">
+						<top>185</top>
+						<width>250</width>
+						<height>45</height>
+						<font>font30_title</font>
+						<textcolor>FF49ADEE</textcolor>
+						<align>center</align>
+						<aligny>center</aligny>
+						<scroll>true</scroll>
+						<scrollspeed>40</scrollspeed>
+						<scrollsuffix>  -  </scrollsuffix>
+						<label>$INFO[VideoPlayer.SubtitleName]</label>
+						<visible>VideoPlayer.SubtitlesEnabled + !String.IsEmpty(VideoPlayer.SubtitleName) + Control.HasFocus(700)</visible>
+					</control>
+
+					<!-- 2A. Záložní kód jazyka (bez fokusu) -->
+					<control type="label">
+						<top>185</top>
+						<width>250</width>
+						<height>45</height>
+						<font>font30_title</font>
+						<textcolor>8049ADEE</textcolor>
+						<align>center</align>
+						<aligny>center</aligny>
+						<scroll>true</scroll>
+						<scrollspeed>40</scrollspeed>
+						<scrollsuffix>  -  </scrollsuffix>
+						<label>$INFO[VideoPlayer.SubtitlesLanguage]</label>
+						<visible>VideoPlayer.SubtitlesEnabled + String.IsEmpty(VideoPlayer.SubtitleName) + !String.IsEmpty(VideoPlayer.SubtitlesLanguage) + !Control.HasFocus(700)</visible>
+					</control>
+
+					<!-- 2B. Záložní kód jazyka (při fokusu) -->
+					<control type="label">
+						<top>185</top>
+						<width>250</width>
+						<height>45</height>
+						<font>font30_title</font>
+						<textcolor>FF49ADEE</textcolor>
+						<align>center</align>
+						<aligny>center</aligny>
+						<scroll>true</scroll>
+						<scrollspeed>40</scrollspeed>
+						<scrollsuffix>  -  </scrollsuffix>
+						<label>$INFO[VideoPlayer.SubtitlesLanguage]</label>
+						<visible>VideoPlayer.SubtitlesEnabled + String.IsEmpty(VideoPlayer.SubtitleName) + !String.IsEmpty(VideoPlayer.SubtitlesLanguage) + Control.HasFocus(700)</visible>
+					</control>
+				</control>
+
+				<!-- 8. RECORD (jen u PVR, 150x150 vycentrovaný na osu 260px -> top 55) -->
+				<control type="group" id="218">
+					<width>150</width>
+					<height>260</height>
 					<visible>PVR.CanRecordPlayingChannel</visible>
+					<control type="togglebutton" id="208">
+						<top>55</top>
+						<width>150</width>
+						<height>150</height>
+						<onleft>700</onleft>
+						<texturefocus colordiffuse="FF49ADEE">osd_record.png</texturefocus>
+						<texturenofocus>osd_record.png</texturenofocus>
+						<alttexturefocus colordiffuse="red">osd_record.png</alttexturefocus>
+						<alttexturenofocus colordiffuse="red">osd_record.png</alttexturenofocus>
+						<usealttexture>Player.Record</usealttexture>
+						<onclick>PVR.ToggleRecordPlayingChannel</onclick>
+					</control>
 				</control>
 			</control>
 		</control>
