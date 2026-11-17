@@ -3,7 +3,7 @@ name: Vytvorit Kodi Skin Release
 on:
   push:
     tags:
-      - 'v*' # Spustí se při nahrání tagu začínajícího na 'v' (např. v1.0.5)
+      - 'v*' # Spustí se při nahrání tagu začínajícího na 'v' (např. v4.0.22)
   workflow_dispatch: # Umožní spuštění i ručně na webu GitHubu
 
 permissions:
@@ -18,9 +18,9 @@ jobs:
 
       - name: Zabalení skinu do ZIPu pro Kodi
         run: |
-          # Načtení ID a verze přímo ze souboru addon.xml
-          ADDON_ID=$(grep -oPm1 "(?<=<addon id=\")[^\"]+" addon.xml)
-          VERSION=$(grep -oPm1 "(?<=version=\")[^\"]+" addon.xml)
+          # Načtení ID a verze přesně z tagu <addon> v souboru addon.xml
+          ADDON_ID=$(python3 -c "import xml.etree.ElementTree as ET; print(ET.parse('addon.xml').getroot().attrib['id'])")
+          VERSION=$(python3 -c "import xml.etree.ElementTree as ET; print(ET.parse('addon.xml').getroot().attrib['version'])")
           
           # Vytvoření dočasné složky se správným názvem pro Kodi
           mkdir -p build/$ADDON_ID
