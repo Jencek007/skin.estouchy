@@ -61,7 +61,7 @@ jobs:
         if: steps.check_version.outputs.exists == 'false'
         run: |
           # Stažení repozitáře repository.malyslon
-          git clone https://x-access-token:${{ secrets.REPO_TOKEN }}@://github.com temp_repo
+          git clone https://x-access-token:${{ secrets.REPO_TOKEN }}@github.com temp_repo
 
           # Smazání starých souborů skinu a nakopírování nových
           rm -rf temp_repo/skin.estouchy/*
