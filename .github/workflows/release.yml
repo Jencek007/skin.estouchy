@@ -57,12 +57,17 @@ jobs:
           files: ${{ steps.check_version.outputs.addon_id }}-${{ steps.check_version.outputs.version }}.zip
           generate_release_notes: true
 
+      - name: Stažení repository.malyslon
+        if: steps.check_version.outputs.exists == 'false'
+        uses: actions/checkout@v4
+        with:
+          repository: Jencek007/repository.malyslon
+          token: ${{ secrets.REPO_TOKEN }}
+          path: temp_repo
+
       - name: Aktualizace repository.malyslon
         if: steps.check_version.outputs.exists == 'false'
         run: |
-          # Stažení repozitáře repository.malyslon
-          git clone https://x-access-token:${{ secrets.REPO_TOKEN }}@github.com temp_repo
-
           # Smazání starých souborů skinu a nakopírování nových
           rm -rf temp_repo/skin.estouchy/*
           rsync -av --exclude='.git*' --exclude='build' --exclude='temp_repo' --exclude='*.zip' . temp_repo/skin.estouchy/
